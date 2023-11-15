@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">  <!-- viewport meta tag -->
+    <title>Calendar of Days Off</title>
+
+    <link rel="icon" href="./image/javascript.ico" type="image/x-icon">  <!-- favicon link -->
+
+    <!--
+         Here there will be links to resources, external JS and CSS scripts,
+         e.g. jQuery, jQuery UI, Bootstrap, jsPDF, iCalendar and others.
+    -->
+
+    <!-- jQuery -->
+    <script src="./libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
+    <script src="./libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+
+    <!-- jQuery UI - Datepicker -->
+    <link rel="stylesheet" href="./libs/jqueryui/1.13.2/themes/base/jquery-ui.css">
+    <script src="./libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+
+    <!-- jsPDF -->
+
+    <!-- iCalendar Library -->
+
+    <!-- external JS script -->
+    <script src="./js/script.js"></script>
+
+    <!-- Here will be the CSS styles for the page elements. -->
+    <style>
+        /* styles for the back button */
+        #back-button {
+            margin-top: 350px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="container" class="d-flex justify-content-center" style="min-height: 100vh;">
+    <!-- The container div is used to center the body content horizontally using Bootstrap classes.
+    1. The class .d-flex creates a flex container.
+    2. The class .justify-content-center horizontally centers the content within the flex container. -->
+
+        <div class="row" style="margin-top: 27px;">
+            <div class="col-md-6">
+                <div id="content-of-column-1">  <!-- This div contains the content of first column -->
+                    <div>
+                        <h1>Calendar <br>of Days Off</h1>
+                        <label for="datepicker"><b>Select Your Days Off:</b></label><br>
+                        <!-- The <input> element with type "text" creates the datepicker input field. It allows users to select their desired days off -->
+                        <input type="text" id="datepicker" name="datepicker">
+                    </div>
+
+                    <!-- The back button redirects to the form page -->
+                    <div id="back-button">
+                        <a href="form.html" class="btn btn-secondary">Back to the form</a>
+                    </div>
+                    <br>
+
+                    <!-- Button to show all Church and Public Holidays in the current year -->
+                    <div>
+                        <button type="button" class="btn btn-primary" id="showAllHolidaysBtn">Show all Church and Public<br> Holidays in this Year</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">  <!-- This div contains the content of second column -->
+                Here will be content of second column.
+                <!--
+                    Here will be a list of days off selected by the user in the Datepicker Calendar.
+                    Under the list of days off it will be info about number of days selected by user, e.g.: You have selected 1 out of 26 days.
+
+                    Below that will be the buttons:`
+                    Uncheck all days
+                    Export Days Off to PDF
+                    Export to Your calendar \ Gmail
+                                            \ Outlook.
+
+                    At the bottom will be the legend of all kinds of days in datepicker (church holiday, public holiday, weekend, working day).
+                -->
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {  // jQuery document ready function
+
+            // get the year parameter from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const year = urlParams.get('year');
+
+            // set the year in the page title and heading
+            document.title = "Take Your Days Off in " + year;
+        });
+    </script>
+</body>
+</html>
