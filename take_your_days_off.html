@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="./libs/jqueryui/1.13.2/themes/base/jquery-ui.css">
     <script src="./libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="./libs/bootstrap-icons/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
     <!-- jsPDF -->
 
     <!-- iCalendar Library -->
@@ -32,11 +35,56 @@
 
     <!-- Here will be the CSS styles for the page elements. -->
     <style>
+        /* styles for elements of Legend: */
+        #legend {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            width: 200px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+
+        #church-holiday-legend {
+            background-color: red;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        #public-holiday-legend {
+            background-color: orange;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        #weekend-legend {
+            background-color: green;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        #working-day-legend {
+            background-color: grey;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        /* end of styles for elements of Legend */
+
         /* styles for the back button */
         #back-button {
             margin-top: 350px;
         }
 
+        /* styles for the content of first column */
+        #content-of-column-1 {
+            margin-left: 20px;  /* adds a left margin of 20 pixels to the content of first column */
+        }
+
+        /* styles for the content of second column */
+        #content-of-column-2 {
+            margin-left: 20px;  /* adds a left margin of 20 pixels to the content of second column */
+        }
     </style>
 </head>
 <body>
@@ -68,25 +116,58 @@
                 </div>
             </div>
 
-            <div class="col-md-6">  <!-- This div contains the content of second column -->
-                Here will be content of second column.
-                <!--
-                    Here will be a list of days off selected by the user in the Datepicker Calendar.
-                    Under the list of days off it will be info about number of days selected by user, e.g.: You have selected 1 out of 26 days.
+            <div class="col-md-6">
+                <div id="content-of-column-2">  <!-- This div contains the content of second column -->
+                    <br>
+                    <div>
+                        <!-- The selected-days unordered list displays the list of days off that have been selected by the user -->
+                        <b>Selected Days Off:</b>
+                        <ul id="selected-days"></ul>
 
-                    Below that will be the buttons:`
-                    Uncheck all days
-                    Export Days Off to PDF
-                    Export to Your calendar \ Gmail
-                                            \ Outlook.
+                        <!-- Displays the number of selected days out of the total available days -->
+                        <p>You have selected <b><span id="counter-value">0</span></b> out of <b>26</b> days.</p>
+                    </div>
 
-                    At the bottom will be the legend of all kinds of days in datepicker (church holiday, public holiday, weekend, working day).
-                -->
+                    <div>
+                        <!-- Button to uncheck all selected days -->
+                        <button type="button" id="uncheckAllDaysBtn" class="btn btn-danger" style="margin-bottom: 24px;"><i class="bi bi-journal-minus"></i> Uncheck all days</button>
+                    </div>
+
+                    <div>
+                        <!-- Button to export selected days off to PDF -->
+                        <button type="button" class="btn btn-primary" id="exportPDFBtn"><i class="bi bi-file-pdf"></i> Export Days Off to PDF</button>
+                        <div id="pdfTable"></div>
+                    </div>
+                    <br>
+
+                    <!-- Dropdown menu to export selected days off to different calendar platforms -->
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-calendar"></i> Export to Your calendar: <span class="caret"></span> <!-- dropdown button -->
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" href="#" id="gmail-export">Gmail</a></li>
+                            <li><a class="dropdown-item" href="#" id="outlook-export">Outlook</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Legend section explaining the meaning of different calendar day types -->
+                    <div id="legend" style="margin-top: 95px;"> Legend:
+                        <div id="church-holiday-legend">Church holiday</div>
+                        <div id="public-holiday-legend">Public holiday</div>
+                        <div id="weekend-legend">Weekend</div>
+                        <div id="working-day-legend">Working day</div>
+                    </div>
+                    <br>
+                </div>
             </div>
         </div>
     </div>
     <script>
         $(document).ready(function() {  // jQuery document ready function
+
+            // initialize the dropdown
+            var dropdown = new bootstrap.Dropdown(document.querySelector('.dropdown-toggle'));
 
             // get the year parameter from the URL
             const urlParams = new URLSearchParams(window.location.search);
