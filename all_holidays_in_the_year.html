@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">  <!-- viewport meta tag -->
+    <title>Church Holidays and Public Holidays</title>
+
+    <link rel="icon" href="./image/javascript.ico" type="image/x-icon">  <!-- favicon link -->
+
+    <!-- jQuery -->
+    <script src="./libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- Bootstrap CSS stylesheet -->
+    <link rel="stylesheet" href="./libs/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Bootstrap JavaScript -->
+    <script src="./libs/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="./libs/bootstrap-icons/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+    <!-- jsPDF -->
+
+    <!-- Custom CSS -->
+    <style>
+        /* styles for the Back to the calendar button */
+        #button-back-to-the-calendar {
+            margin-top: 24px;
+        }
+
+        /* styles for the Export to PDF button */
+        #button-export-to-pdf {
+            margin-top: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container" class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <!-- The container div is used to center the body content horizontally and vertically using Bootstrap classes.
+    1. The class .d-flex creates a flex container.
+    2. The class .align-items-center vertically centers the content within the flex container.
+    3. The class .justify-content-center horizontally centers the content within the flex container. -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    <!-- Heading displaying the list of holidays for a specific year -->
+                    <h2>List of Holidays for Year <span id="year"></span>:</h2>
+                    <!-- Unordered list element that will contain the holiday items -->
+                    <ul id="holidays">Here it will be the list of public and church holidays. The list will be created in js script.</ul>
+                </div>
+                <div>
+                    <div>
+                        <!-- Back to the form button -->
+                        <a href="form.html" class="btn btn-secondary">Back to the form</a>
+                    </div>
+                    <div id="button-back-to-the-calendar">
+                        <!-- Back to the calendar button -->
+                        <button type="button" class="btn btn-info" onclick="goBack()">Back to the calendar</button>
+                    </div>
+                    <div id="button-export-to-pdf">
+                        <!-- Export to PDF button -->
+                        <button type="button" class="btn btn-primary" id="export-to-pdf"><i class="bi bi-file-pdf"></i> Export to PDF: List of Holidays for this Year</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // get the year parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const year = urlParams.get('year');
+
+    // In this js script, there will be functions like this:
+    // *function to get all public holidays for the given year
+        function getPublicHolidays(year) {
+
+        }
+
+    // *function to get all church holidays for the given year
+    // (and also functions to calculate dates of movable feasts for the given year: Easter and Corpus Christi).
+        function getChurchHolidays(year) {
+
+        }
+
+        // set the year in the page title and heading
+        document.title = `Church Holidays and Public Holidays for Year ${year}`;
+        document.getElementById('year').textContent = year;
+
+    // Here will be the code for the list of public and church holidays.
+    // After organized list of holidays will be created, this list will be displayed on the page.
+
+    // *it will be implemented function to generate the PDF document using jsPDF library.
+    // The function will be connected to the button with Id: export-to-pdf
+        function generatePDF(year) {
+
+        }
+
+    // Function to navigate back to the previous page (take_your_days_off.html).
+        function goBack() {
+            // Retrieve the query string from the current URL
+            var yearParam = window.location.search;
+
+            // Construct the new URL by appending the query string to "take_your_days_off.html"
+            var newURL = "take_your_days_off.html" + yearParam;
+
+            // Navigate to the new URL
+            window.location.href = newURL;
+        }
+    </script>
+</body>
+</html>

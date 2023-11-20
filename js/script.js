@@ -29,4 +29,9 @@ $(document).ready(function() {  // jQuery document ready function
         }
     });
 
+    // Event handler for showing all holidays (public and church holidays) in the selected year
+    $("#showAllHolidaysBtn").click(function() {
+        window.location.href = "all_holidays_in_the_year.html?year=" + year;
+    });
+
 });
