@@ -7,11 +7,6 @@
 
     <link rel="icon" href="./image/javascript.ico" type="image/x-icon">  <!-- favicon link -->
 
-    <!--
-         Here there will be links to resources, external JS and CSS scripts,
-         e.g. jQuery, jQuery UI, Bootstrap, jsPDF, iCalendar and others.
-    -->
-
     <!-- jQuery -->
     <script src="./libs/jquery/3.6.4/jquery.min.js"></script>
 
@@ -27,14 +22,42 @@
     <link rel="stylesheet" href="./libs/bootstrap-icons/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
     <!-- jsPDF -->
+    <script src="./libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- jsPDF autotable -->
+    <script src="./libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+    <!-- Moment -->
+    <script src="./libs/moment/2.29.1/moment.min.js"></script>
 
     <!-- iCalendar Library -->
 
     <!-- external JS script -->
     <script src="./js/script.js"></script>
 
-    <!-- Here will be the CSS styles for the page elements. -->
+    <!-- Custom CSS -->
     <style>
+        /* styles for elements of datepicker (days): */
+        .weekend {
+            background-color: green;  /* set the background color of elements with the class .weekend to green */
+            pointer-events: none;  /* set Saturdays and Sundays so they cannot be selected as holidays in the datepicker */
+        }
+
+        .working-day {
+            background-color: grey;  /* set the background color of elements with the class .working-day to grey */
+        }
+
+        .public-holiday {
+            background-color: orange;  /* set the background color of elements with the class .public-holiday to orange */
+            pointer-events: all;  /* this line of code enables tooltip */
+        }
+
+        .church-holiday {
+            background-color: red;  /* set the background color of elements with the class .church-holiday to red */
+            pointer-events: all;  /* this line of code enables tooltip */
+        }
+        /* end of styles for elements of datepicker (days) */
+
         /* styles for elements of Legend: */
         #legend {
             font-family: Arial, Helvetica, sans-serif;
@@ -75,6 +98,9 @@
         #back-button {
             margin-top: 350px;
         }
+
+        /* disable the Done button in datepicker */
+        button.ui-datepicker-close { display: none; }
 
         /* styles for the content of first column */
         #content-of-column-1 {
@@ -165,6 +191,7 @@
     </div>
     <script>
         $(document).ready(function() {  // jQuery document ready function
+            $('[data-toggle="tooltip"]').tooltip();  // enable tooltip (feature for church holidays and public holidays in datepicker)
 
             // initialize the dropdown
             var dropdown = new bootstrap.Dropdown(document.querySelector('.dropdown-toggle'));
