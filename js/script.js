@@ -278,4 +278,88 @@ $(document).ready(function() {  // jQuery document ready function
         doc.save(filename);
     });
 
+    // Export selected days (days off) to Gmail (Google Calendar), in the iCalendar format
+    $("#gmail-export").click(function() {
+        // Initialize an empty array to store selected dates
+        var selectedDates = [];
+
+        // Iterate over each list item in the #selected-days element
+        $('#selected-days li').each(function() {
+            // Retrieve the text content of the list item and add it to the selectedDates array
+            selectedDates.push($(this).text());
+        });
+
+        // Create a calendar string
+        var calendarString = "BEGIN:VCALENDAR\nVERSION:2.0\n";
+
+        // Loop through selected dates and add events to calendar string
+        for (var i = 0; i < selectedDates.length; i++) {
+            // Calculate start date, end date, reminder date, and trigger for each selected date
+            var startDate = moment(selectedDates[i], "DD-MM-YYYY").format('YYYYMMDD');
+            var endDate = moment(selectedDates[i], "DD-MM-YYYY").add(1, 'days').format('YYYYMMDD');
+            var reminderDate = moment(selectedDates[i], "DD-MM-YYYY").subtract(1, 'days').set('hour', 17).set('minute', 30).set('second', 0).format('YYYYMMDDTHHmmss');
+            var trigger = moment(selectedDates[i], "DD-MM-YYYY").set('hour', 0).set('minute', 0).set('second', 0).diff(moment(reminderDate), 'minutes');
+
+            // Add event details to the calendar string
+            calendarString += "BEGIN:VEVENT\nDTSTART;VALUE=DATE:" + startDate + "\nDTEND;VALUE=DATE:" + endDate + "\nSUMMARY:Day Off\nBEGIN:VALARM\nACTION:DISPLAY\nDESCRIPTION:Reminder\nTRIGGER:-PT" + trigger + "M\nEND:VALARM\nEND:VEVENT\n";
+        }
+
+        calendarString += "END:VCALENDAR";  // Add the closing tag for the iCalendar format to the calendar string
+
+        const today_formatted_date = moment().format('DD-MM-YYYY');  // Get the current date formatted as DD-MM-YYYY
+        const filename = `gmail-your_days_off_in_${year}-saved_${today_formatted_date}.ics`;  // Generate the filename for the exported iCalendar file, incorporating the year and current date
+
+        // Create a blob object from the calendar string
+        var blob = new Blob([calendarString], {type: "text/calendar;charset=utf-8"});
+
+        var downloadLink = document.createElement("a");  // Create a download link element
+        downloadLink.href = window.URL.createObjectURL(blob);  // Set the URL of the download link to the Blob object
+        downloadLink.download = filename;  // Set the filename for the download
+        document.body.appendChild(downloadLink);  // Append the download link to the document body
+        downloadLink.click();  // Simulate a click on the download link to trigger the download
+        document.body.removeChild(downloadLink);  // Remove the download link from the document body
+    });
+
+    // Export selected days (days off) to Outlook (Outlook Calendar), in the iCalendar format
+    $("#outlook-export").click(function() {
+        // Initialize an empty array to store selected dates
+        var selectedDates = [];
+
+        // Iterate over each list item in the #selected-days element
+        $('#selected-days li').each(function() {
+            // Retrieve the text content of the list item and add it to the selectedDates array
+            selectedDates.push($(this).text());
+        });
+
+        // Create a calendar string
+        var calendarString = "BEGIN:VCALENDAR\nVERSION:2.0\n";
+
+        // Loop through selected dates and add events to calendar string
+        for (var i = 0; i < selectedDates.length; i++) {
+            // Calculate start date, end date, reminder date, and trigger for each selected date
+            var startDate = moment(selectedDates[i], "DD-MM-YYYY").format('YYYYMMDD');
+            var endDate = moment(selectedDates[i], "DD-MM-YYYY").add(1, 'days').format('YYYYMMDD');
+            var reminderDate = moment(selectedDates[i], "DD-MM-YYYY").subtract(1, 'days').set('hour', 17).set('minute', 30).set('second', 0).format('YYYYMMDDTHHmmss');
+            var trigger = moment(selectedDates[i], "DD-MM-YYYY").set('hour', 0).set('minute', 0).set('second', 0).diff(moment(reminderDate), 'minutes');
+
+            // Add event details to the calendar string
+            calendarString += "BEGIN:VEVENT\nDTSTART;VALUE=DATE:" + startDate + "\nDTEND;VALUE=DATE:" + endDate + "\nSUMMARY:Day Off\nBEGIN:VALARM\nACTION:DISPLAY\nDESCRIPTION:Reminder\nTRIGGER:-PT" + trigger + "M\nEND:VALARM\nEND:VEVENT\n";
+        }
+
+        calendarString += "END:VCALENDAR";  // Add the closing tag for the iCalendar format to the calendar string
+
+        const today_formatted_date = moment().format('DD-MM-YYYY');  // Get the current date formatted as DD-MM-YYYY
+        const filename = `outlook-your_days_off_in_${year}-saved_${today_formatted_date}.ics`;  // Generate the filename for the exported iCalendar file, incorporating the year and current date
+
+        // Create a blob object from the calendar string
+        var blob = new Blob([calendarString], {type: "text/calendar;charset=utf-8"});
+
+        var downloadLink = document.createElement("a");  // Create a download link element
+        downloadLink.href = window.URL.createObjectURL(blob);  // Set the URL of the download link to the Blob object
+        downloadLink.download = filename;  // Set the filename for the download
+        document.body.appendChild(downloadLink);  // Append the download link to the document body
+        downloadLink.click();  // Simulate a click on the download link to trigger the download
+        document.body.removeChild(downloadLink);  // Remove the download link from the document body
+    });
+
 });
