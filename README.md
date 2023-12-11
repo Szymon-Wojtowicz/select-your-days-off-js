@@ -24,7 +24,7 @@ This project provides a user-friendly web interface for selecting days off, visu
 - Export selected days to a PDF file.
 - Export selected days in iCalendar format for Gmail and Outlook calendars.
 - Holiday display functionality.
-- Responsive and user-friendly design.
+- Responsive and user-friendly design (using Twitter Bootstrap).
 
 ## Installation
 
@@ -54,13 +54,17 @@ This project provides a user-friendly web interface for selecting days off, visu
 
 ## Configuration
 
-- The project is configured to use jQuery, jQuery UI, jsPDF, and moment.js. //??? Ensure these libraries are included and properly linked in the HTML file.
+- The project is configured to use Twitter Bootstrap, jQuery, jQuery UI, Moment.js, jsPDF, jsPDF-AutoTable, iCalendar and FileSaver.
 
 - The `holidays` array in `script.js` is updated with the corresponding holidays (their days) for the selected year.
 
 ## Dependencies
 
+- [Twitter Bootstrap](https://getbootstrap.com/)
 - [jQuery](https://jquery.com/)
 - [jQuery UI](https://jqueryui.com/)
-- [jsPDF](https://github.com/eKoopmans/html2pdf.js)
-- [moment.js](https://momentjs.com/)
+- [Moment.js](https://cdnjs.com/libraries/moment.js/2.29.1)
+- [jsPDF](https://cdnjs.com/libraries/jspdf)
+- [jsPDF-AutoTable](https://github.com/simonbengtsson/jsPDF-AutoTable)
+- [iCalendar](https://github.com/nwcell/ics.js/)
+- [FileSaver](https://cdnjs.com/libraries/FileSaver.js)
