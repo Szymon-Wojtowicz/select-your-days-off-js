@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">  <!-- viewport meta tag -->
+
+    <!-- viewport meta tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Church Holidays and Public Holidays</title>
 
-    <link rel="icon" href="./image/javascript.ico" type="image/x-icon">  <!-- favicon link -->
+    <!-- favicon link -->
+    <link rel="icon" href="./image/javascript.ico" type="image/x-icon">
 
     <!-- jQuery -->
     <script src="./libs/jquery/3.6.4/jquery.min.js"></script>
@@ -78,7 +82,7 @@
     // function to get all public holidays for the given year
     function getPublicHolidays(year) {
         // Define an array of holiday objects for the given year
-        var holidays = [
+        const holidays = [
             // public holidays
             {date: new Date(year, 4, 1), name: 'Labour Day', type: 'Public holiday'},
             {date: new Date(year, 4, 3), name: 'May 3rd Constitution Day', type: 'Public holiday'},
@@ -91,12 +95,43 @@
 
     // function to get all church holidays for the given year
     function getChurchHolidays(year) {
+        // function to calculate Easter date for the given year
+        function getEaster(year) {
+            const a = year % 19;
+            const b = Math.floor(year / 100);
+            const c = year % 100;
+            const d = Math.floor(b / 4);
+            const e = b % 4;
+            const f = Math.floor((b + 8) / 25);
+            const g = Math.floor((b - f + 1) / 3);
+            const h = (19 * a + b - d - g + 15) % 30;
+            const i = Math.floor(c / 4);
+            const k = c % 4;
+            const l = (32 + 2 * e + 2 * i - h - k) % 7;
+            const m = Math.floor((a + 11 * h + 22 * l) / 451);
+            const n = Math.floor((h + l - 7 * m + 114) / 31);
+            const p = (h + l - 7 * m + 114) % 31;
+
+            // Return a new Date object representing the Easter date for the given year
+            return new Date(year, n - 1, p + 1);
+        }
+
         // Calculate the date for Easter Monday based on the given year
-        var easterMonday = getEaster(year);
+        const easterMonday = getEaster(year);
         easterMonday.setDate(easterMonday.getDate() + 1);
 
+        // function to calculate Corpus Christi date for the given year
+        function getCorpusChristi(year) {
+            const easter = getEaster(year);
+            const corpusChristi = new Date(easter.getTime());
+            corpusChristi.setDate(easter.getDate() + 60);
+
+            // Return a new Date object representing the Corpus Christi date for the given year
+            return corpusChristi;
+        }
+
         // Define an array of holiday objects for the given year
-        var holidays = [
+        const holidays = [
             // church holidays
             {date: new Date(year, 0, 1), name: 'New Year', type: 'Church holiday'},
             {date: new Date(year, 0, 6), name: 'Feast of the Three Kings', type: 'Church holiday'},
@@ -108,37 +143,6 @@
             {date: new Date(year, 11, 25), name: '1st day of Christmas', type: 'Church holiday'},
             {date: new Date(year, 11, 26), name: '2nd day of Christmas', type: 'Church holiday'}
         ];
-
-        // function to calculate Easter date for the given year
-        function getEaster(year) {
-            var a = year % 19;
-            var b = Math.floor(year / 100);
-            var c = year % 100;
-            var d = Math.floor(b / 4);
-            var e = b % 4;
-            var f = Math.floor((b + 8) / 25);
-            var g = Math.floor((b - f + 1) / 3);
-            var h = (19 * a + b - d - g + 15) % 30;
-            var i = Math.floor(c / 4);
-            var k = c % 4;
-            var l = (32 + 2 * e + 2 * i - h - k) % 7;
-            var m = Math.floor((a + 11 * h + 22 * l) / 451);
-            var n = Math.floor((h + l - 7 * m + 114) / 31);
-            var p = (h + l - 7 * m + 114) % 31;
-
-            // Return a new Date object representing the Easter date for the given year
-            return new Date(year, n - 1, p + 1);
-        }
-
-        // function to calculate Corpus Christi date for the given year
-        function getCorpusChristi(year) {
-            var easter = getEaster(year);
-            var corpusChristi = new Date(easter.getTime());
-            corpusChristi.setDate(easter.getDate() + 60);
-
-            // Return a new Date object representing the Corpus Christi date for the given year
-            return corpusChristi;
-        }
 
         // return a list of church holidays for the given year
         return holidays;
@@ -224,8 +228,11 @@
         // Get the current date formatted as 'DD-MM-YYYY'
         const today_formatted_date = moment().format('DD-MM-YYYY');
 
+        // Create a unique timestamp in the format HH:mm:ss for the file name
+        const currentTime = moment().format('HH:mm:ss');
+
         // Create a filename for the PDF document
-        const filename = `all_holidays_in_${year}` + "-saved_" + today_formatted_date + ".pdf";
+        const filename = `all_holidays_in_${year}-saved_${today_formatted_date}_${currentTime}.pdf`;
 
         // Save the PDF document with the specified filename
         doc.save(filename);
@@ -246,10 +253,10 @@
     // Function to navigate back to the previous page (take_your_days_off.html)
     function goBack() {
         // Retrieve the query string from the current URL
-        var yearParam = window.location.search;
+        const yearParam = window.location.search;
 
         // Construct the new URL by appending the query string to "take_your_days_off.html"
-        var newURL = "take_your_days_off.html" + yearParam;
+        const newURL = "take_your_days_off.html" + yearParam;
 
         // Navigate to the new URL
         window.location.href = newURL;

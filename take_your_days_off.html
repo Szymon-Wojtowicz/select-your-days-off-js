@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">  <!-- viewport meta tag -->
+
+    <!-- viewport meta tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Calendar of Days Off</title>
 
-    <link rel="icon" href="./image/javascript.ico" type="image/x-icon">  <!-- favicon link -->
+    <!-- favicon link -->
+    <link rel="icon" href="./image/javascript.ico" type="image/x-icon">
 
     <!-- jQuery -->
     <script src="./libs/jquery/3.6.4/jquery.min.js"></script>
@@ -196,9 +200,6 @@
 <script>
     $(document).ready(function() {  // jQuery document ready function
         $('[data-toggle="tooltip"]').tooltip();  // enable tooltip (feature for church holidays and public holidays in datepicker)
-
-        // initialize the dropdown
-        var dropdown = new bootstrap.Dropdown(document.querySelector('.dropdown-toggle'));
 
         // get the year parameter from the URL
         const urlParams = new URLSearchParams(window.location.search);

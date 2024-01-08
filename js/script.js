@@ -3,7 +3,7 @@ $(document).ready(function() {  // jQuery document ready function
     const year = new URL(window.location.href).searchParams.get("year");
 
     // Initialize selectedDates as an empty array
-    var selectedDates = [];
+    let selectedDates = [];
 
     // Set the maximum number of selectable days
     const maxSelectableDays = 26;
@@ -15,11 +15,11 @@ $(document).ready(function() {  // jQuery document ready function
     // Within this function, it is defined the logic to determine the CSS classes and tooltip text for each date.
     // The returned values will be applied to the corresponding date in the datepicker.
     function getCssClassesAndTooltipText(date) {
-        var day = date.getDay();  // Get the day of the week (0-6) from the provided date
-        var cssClass = "";  // Initialize an empty string variable to store the CSS class
-        var tooltip = "";  // Initialize an empty string variable to store the tooltip text
+        let day = date.getDay();  // Get the day of the week (0-6) from the provided date
+        let cssClass = "";  // Initialize an empty string variable to store the CSS class
+        let tooltip = "";  // Initialize an empty string variable to store the tooltip text
 
-        // Check if it's a weekend
+        // Check if it's a weekend or a working day
         if (day === 0 || day === 6) {
             cssClass = "weekend";
         } else {
@@ -88,11 +88,11 @@ $(document).ready(function() {  // jQuery document ready function
             // The code within this function handles the logic for selecting and deselecting dates, updating the counter,
             // and calling the checkSelectedDays function to update the buttons' states based on the selected dates.
 
-            var date = $(this).datepicker('getDate');  // Get the selected date from the datepicker widget and assign it to the variable date
-            var dateString = $.datepicker.formatDate('dd-mm-yy', date);  // Format the selected date as a string in the format dd-mm-yy using the jQuery UI datepicker's formatDate function and assign it to the variable dateString
+            let date = $(this).datepicker('getDate');  // Get the selected date from the datepicker widget and assign it to the variable date
+            let dateString = $.datepicker.formatDate('dd-mm-yy', date);  // Format the selected date as a string in the format dd-mm-yy using the jQuery UI datepicker's formatDate function and assign it to the variable dateString
 
-            var index = $.inArray(dateString, selectedDates);  // Find the index of the selected date in the array of selected dates
-            var counter = document.getElementById('counter-value');  // Get the element with the ID counter-value and assign it to the variable counter
+            let index = $.inArray(dateString, selectedDates);  // Find the index of the selected date in the array of selected dates
+            let counter = document.getElementById('counter-value');  // Get the element with the ID counter-value and assign it to the variable counter
 
             if (index === -1 && selectedDates.length < maxSelectableDays) {
                 // If the index is equal to -1 (indicating that the selected date is not already in the selectedDates array)
@@ -159,41 +159,41 @@ $(document).ready(function() {  // jQuery document ready function
 
     // Function to calculate Easter date for the given year
     function getEaster(year) {
-        var a = year % 19;
-        var b = Math.floor(year / 100);
-        var c = year % 100;
-        var d = Math.floor(b / 4);
-        var e = b % 4;
-        var f = Math.floor((b + 8) / 25);
-        var g = Math.floor((b - f + 1) / 3);
-        var h = (19 * a + b - d - g + 15) % 30;
-        var i = Math.floor(c / 4);
-        var k = c % 4;
-        var l = (32 + 2 * e + 2 * i - h - k) % 7;
-        var m = Math.floor((a + 11 * h + 22 * l) / 451);
-        var n = Math.floor((h + l - 7 * m + 114) / 31);
-        var p = (h + l - 7 * m + 114) % 31;
+        const a = year % 19;
+        const b = Math.floor(year / 100);
+        const c = year % 100;
+        const d = Math.floor(b / 4);
+        const e = b % 4;
+        const f = Math.floor((b + 8) / 25);
+        const g = Math.floor((b - f + 1) / 3);
+        const h = (19 * a + b - d - g + 15) % 30;
+        const i = Math.floor(c / 4);
+        const k = c % 4;
+        const l = (32 + 2 * e + 2 * i - h - k) % 7;
+        const m = Math.floor((a + 11 * h + 22 * l) / 451);
+        const n = Math.floor((h + l - 7 * m + 114) / 31);
+        const p = (h + l - 7 * m + 114) % 31;
 
         // Return a new Date object representing the Easter date for the given year
         return new Date(year, n - 1, p + 1);
     }
 
+    // Calculate the date for Easter Monday based on the given year
+    const easterMonday = getEaster(year);
+    easterMonday.setDate(easterMonday.getDate() + 1);
+
     // Function to calculate Corpus Christi date for the given year
     function getCorpusChristi(year) {
-        var easter = getEaster(year);
-        var corpusChristi = new Date(easter.getTime());
+        const easter = getEaster(year);
+        const corpusChristi = new Date(easter.getTime());
         corpusChristi.setDate(easter.getDate() + 60);
 
         // Return a new Date object representing the Corpus Christi date for the given year
         return corpusChristi;
     }
 
-    // Calculate the date for Easter Monday based on the given year
-    var easterMonday = getEaster(year);
-    easterMonday.setDate(easterMonday.getDate() + 1);
-
     // Define an array of holiday objects for the given year
-    var holidays = [
+    const holidays = [
         // Public holidays
         { date: new Date(year, 4, 1), name: 'Labour Day', type: 'Public holiday' },
         { date: new Date(year, 4, 3), name: 'May 3rd Constitution Day', type: 'Public holiday' },
@@ -265,101 +265,92 @@ $(document).ready(function() {  // jQuery document ready function
 
         doc.setFontSize(10);  // Set the font size to 10
 
-        var spaceFromBottom = 70;  // Fixed space from the bottom of the page
-        var pageHeight = doc.internal.pageSize.height;  // Get the height of the page
-        var textYCoordinate = pageHeight - spaceFromBottom;  // Calculate the Y-coordinate (vertical position) of the text
+        const spaceFromBottom = 70;  // Fixed space from the bottom of the page
+        const pageHeight = doc.internal.pageSize.height;  // Get the height of the page
+        const textYCoordinate = pageHeight - spaceFromBottom;  // Calculate the Y-coordinate (vertical position) of the text
 
         doc.text(selectedDaysText, 14, textYCoordinate);  // Add the selectedDaysText to the PDF document at the specified coordinates (14 is the X-coordinate, horizontal position)
 
         const today_formatted_date = moment().format('DD-MM-YYYY');  // Get the current date and format it as DD-MM-YYYY
-        const filename = `your_days_off_in_${year}-saved_${today_formatted_date}.pdf`;  // Create the filename for the PDF using the current date and the year variable
+        const currentTime = moment().format('HH:mm:ss');  // Create a unique timestamp in the format HH:mm:ss for the file name
+        const filename = `your_days_off_in_${year}-saved_${today_formatted_date}_${currentTime}.pdf`;  // Create the PDF file name by adding the current date, year, and a unique timestamp
 
         // Save the PDF
         doc.save(filename);
     });
 
-    // Export selected days (days off) to Gmail (Google Calendar), in the iCalendar format
-    $("#gmail-export").click(function() {
-        // Initialize an empty array to store selected dates
-        var selectedDates = [];
+    // Function for collecting unique dates selected by the user from Bootstrap Datepicker Calendar
+    function getUniqueDates() {
+        // Use Set to collect unique dates from the text content of list items
+        const uniqueDates = [...new Set($('#selected-days li').map(function() {
+            return $(this).text();
+        }).get())];
 
-        // Iterate over each list item in the #selected-days element
-        $('#selected-days li').each(function() {
-            // Retrieve the text content of the list item and add it to the selectedDates array
-            selectedDates.push($(this).text());
-        });
+        // Return the array of unique dates
+        return uniqueDates;
+    }
+
+    // Function for exporting selected days off to the iCalendar format
+    function exportToICalendar(type) {
+        // Collect unique dates
+        let selectedDates = getUniqueDates();
 
         // Create a calendar string
-        var calendarString = "BEGIN:VCALENDAR\nVERSION:2.0\n";
+        let calendarString = "BEGIN:VCALENDAR\nVERSION:2.0\n";
 
-        // Loop through selected dates and add events to calendar string
-        for (var i = 0; i < selectedDates.length; i++) {
+        // Loop through selected dates and add events to the calendar string
+        selectedDates.forEach(function(selectedDate) {
             // Calculate start date, end date, reminder date, and trigger for each selected date
-            var startDate = moment(selectedDates[i], "DD-MM-YYYY").format('YYYYMMDD');
-            var endDate = moment(selectedDates[i], "DD-MM-YYYY").add(1, 'days').format('YYYYMMDD');
-            var reminderDate = moment(selectedDates[i], "DD-MM-YYYY").subtract(1, 'days').set('hour', 17).set('minute', 30).set('second', 0).format('YYYYMMDDTHHmmss');
-            var trigger = moment(selectedDates[i], "DD-MM-YYYY").set('hour', 0).set('minute', 0).set('second', 0).diff(moment(reminderDate), 'minutes');
-
+            const startDate = moment(selectedDate, "DD-MM-YYYY").format('YYYYMMDD');
+            const endDate = moment(selectedDate, "DD-MM-YYYY").add(1, 'days').format('YYYYMMDD');
+            const reminderDate = moment(selectedDate, "DD-MM-YYYY").subtract(1, 'days').set('hour', 17).set('minute', 30).set('second', 0).format('YYYYMMDDTHHmmss');
+            const trigger = moment(selectedDate, "DD-MM-YYYY").set('hour', 0).set('minute', 0).set('second', 0).diff(moment(reminderDate), 'minutes');
             // Add event details to the calendar string
             calendarString += "BEGIN:VEVENT\nDTSTART;VALUE=DATE:" + startDate + "\nDTEND;VALUE=DATE:" + endDate + "\nSUMMARY:Day Off\nBEGIN:VALARM\nACTION:DISPLAY\nDESCRIPTION:Reminder\nTRIGGER:-PT" + trigger + "M\nEND:VALARM\nEND:VEVENT\n";
-        }
+        });
 
-        calendarString += "END:VCALENDAR";  // Add the closing tag for the iCalendar format to the calendar string
+        // Add the closing tag for the iCalendar format to the calendar string
+        calendarString += "END:VCALENDAR";
 
-        const today_formatted_date = moment().format('DD-MM-YYYY');  // Get the current date formatted as DD-MM-YYYY
-        const filename = `gmail-your_days_off_in_${year}-saved_${today_formatted_date}.ics`;  // Generate the filename for the exported iCalendar file, incorporating the year and current date
+        // Get the current date formatted as DD-MM-YYYY
+        const today_formatted_date = moment().format('DD-MM-YYYY');
+
+        // Create a unique timestamp in the format HH:mm:ss for the file name
+        const currentTime = moment().format('HH:mm:ss');
+
+        // Create the iCalendar file name by adding the current date, year, and a unique timestamp
+        const filename = `${type}-your_days_off_in_${year}-saved_${today_formatted_date}_${currentTime}.ics`;  // Create the ics file name by adding the current date, year, and a unique timestamp
 
         // Create a blob object from the calendar string
-        var blob = new Blob([calendarString], {type: "text/calendar;charset=utf-8"});
+        const blob = new Blob([calendarString], {type: "text/calendar;charset=utf-8"});
 
-        var downloadLink = document.createElement("a");  // Create a download link element
-        downloadLink.href = window.URL.createObjectURL(blob);  // Set the URL of the download link to the Blob object
-        downloadLink.download = filename;  // Set the filename for the download
-        document.body.appendChild(downloadLink);  // Append the download link to the document body
-        downloadLink.click();  // Simulate a click on the download link to trigger the download
-        document.body.removeChild(downloadLink);  // Remove the download link from the document body
+        // Create a download link element
+        const downloadLink = document.createElement("a");
+
+        // Set the URL of the download link to the Blob object
+        downloadLink.href = window.URL.createObjectURL(blob);
+
+        // Set the filename for the download
+        downloadLink.download = filename;
+
+        // Append the download link to the document body
+        document.body.appendChild(downloadLink);
+
+        // Simulate a click on the download link to trigger the download
+        downloadLink.click();
+
+        // Remove the download link from the document body
+        document.body.removeChild(downloadLink);
+    }
+
+    // Export selected days (days off) to Gmail (Google Calendar), in the iCalendar format
+    $("#gmail-export").click(function() {
+        exportToICalendar('gmail');
     });
 
     // Export selected days (days off) to Outlook (Outlook Calendar), in the iCalendar format
     $("#outlook-export").click(function() {
-        // Initialize an empty array to store selected dates
-        var selectedDates = [];
-
-        // Iterate over each list item in the #selected-days element
-        $('#selected-days li').each(function() {
-            // Retrieve the text content of the list item and add it to the selectedDates array
-            selectedDates.push($(this).text());
-        });
-
-        // Create a calendar string
-        var calendarString = "BEGIN:VCALENDAR\nVERSION:2.0\n";
-
-        // Loop through selected dates and add events to calendar string
-        for (var i = 0; i < selectedDates.length; i++) {
-            // Calculate start date, end date, reminder date, and trigger for each selected date
-            var startDate = moment(selectedDates[i], "DD-MM-YYYY").format('YYYYMMDD');
-            var endDate = moment(selectedDates[i], "DD-MM-YYYY").add(1, 'days').format('YYYYMMDD');
-            var reminderDate = moment(selectedDates[i], "DD-MM-YYYY").subtract(1, 'days').set('hour', 17).set('minute', 30).set('second', 0).format('YYYYMMDDTHHmmss');
-            var trigger = moment(selectedDates[i], "DD-MM-YYYY").set('hour', 0).set('minute', 0).set('second', 0).diff(moment(reminderDate), 'minutes');
-
-            // Add event details to the calendar string
-            calendarString += "BEGIN:VEVENT\nDTSTART;VALUE=DATE:" + startDate + "\nDTEND;VALUE=DATE:" + endDate + "\nSUMMARY:Day Off\nBEGIN:VALARM\nACTION:DISPLAY\nDESCRIPTION:Reminder\nTRIGGER:-PT" + trigger + "M\nEND:VALARM\nEND:VEVENT\n";
-        }
-
-        calendarString += "END:VCALENDAR";  // Add the closing tag for the iCalendar format to the calendar string
-
-        const today_formatted_date = moment().format('DD-MM-YYYY');  // Get the current date formatted as DD-MM-YYYY
-        const filename = `outlook-your_days_off_in_${year}-saved_${today_formatted_date}.ics`;  // Generate the filename for the exported iCalendar file, incorporating the year and current date
-
-        // Create a blob object from the calendar string
-        var blob = new Blob([calendarString], {type: "text/calendar;charset=utf-8"});
-
-        var downloadLink = document.createElement("a");  // Create a download link element
-        downloadLink.href = window.URL.createObjectURL(blob);  // Set the URL of the download link to the Blob object
-        downloadLink.download = filename;  // Set the filename for the download
-        document.body.appendChild(downloadLink);  // Append the download link to the document body
-        downloadLink.click();  // Simulate a click on the download link to trigger the download
-        document.body.removeChild(downloadLink);  // Remove the download link from the document body
+        exportToICalendar('outlook');
     });
 
 });
