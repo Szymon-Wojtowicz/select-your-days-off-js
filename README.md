@@ -1,5 +1,4 @@
 # Select Your Days Off (JS) 
-<!-- Project title -->
 
 A web application for selecting and exporting days off using JavaScript, jQuery, jQuery UI, jsPDF, and moment.js.
 
@@ -30,17 +29,15 @@ This project provides a user-friendly web interface for selecting days off, visu
 
 1. Clone the repository:
 
+   Open your terminal and run the following command to clone the repository:
+
     ```bash
     git clone https://github.com/Szymon-Wojtowicz/select-your-days-off-js.git
     ```
+   
+2. Open the application.
 
-2. Open the project directory:
-
-    ```bash
-    cd select-your-days-off-js
-    ```
-
-3. Open the `form.html` file in a web browser.
+   Open `form.html` in your preferred web browser to start using the application.
 
 ## Usage
 
