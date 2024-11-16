@@ -43,11 +43,21 @@
     </style>
 </head>
 <body>
-<div id="container" class="d-flex align-items-center justify-content-center">
-    <!-- The container div is used to center the body content horizontally and vertically using Bootstrap classes.
-    1. The class .d-flex creates a flex container.
-    2. The class .align-items-center vertically centers the content within the flex container.
-    3. The class .justify-content-center horizontally centers the content within the flex container. -->
+<div id="container" class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+
+    <!--
+    The 'container' class in Bootstrap provides a responsive fixed-width container with automatic margins,
+    ensuring the content is centered horizontally within the available screen space.
+
+    The 'd-flex' class enables the flexbox layout for the container, turning it into a flex container.
+    This allows for flexible alignment and distribution of space among the child elements.
+
+    The 'justify-content-center' class centers the content horizontally (along the main axis) within the flex container.
+    This ensures that the elements are aligned in the center horizontally, regardless of screen size.
+
+    The 'align-items-center' class vertically centers the content (along the cross axis) within the flex container.
+    This keeps the content centered in the vertical direction, even on large or small screens.
+    -->
 
     <div class="row">
         <div class="col-md-12">
