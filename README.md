@@ -56,7 +56,16 @@ This project provides a user-friendly web interface for selecting days off, visu
 
    ![Public and church holidays in the date picker calendar](assets/public-and-church-holidays-in-the-date-picker.png)
 
-3. **Select your days off:**
+3. **See holiday details on hover:**
+
+   When you hover the mouse cursor over a day in the calendar that is a public or church holiday, a dynamic tooltip will appear next to the cursor. The tooltip displays the holiday's name and type, updating dynamically based on the day you hover over.
+
+   - **Public holidays**: The tooltip displays the name of the holiday and marks it as a **Public Holiday**.
+   - **Church holidays**: The tooltip displays the name of the holiday and marks it as a **Church Holiday**.
+
+   ![Tooltip showing holiday information](assets/holiday-tooltip-example.png)
+
+4. **Select your days off:**
 
    Use the date picker to select your desired days off. Click on the dates to mark them as selected. You can select max 26 days (besides church and public holidays).
    
@@ -64,7 +73,7 @@ This project provides a user-friendly web interface for selecting days off, visu
    
    ![Selected days off in the date picker calendar](assets/selected-days-off-in-the-date-picker.png)
 
-4. **Unselect all your days off:**
+5. **Unselect all your days off:**
 
    Use the `Uncheck all days` button to unselect all days which you checked earlier. After clicking the `Uncheck all days` button, the list of selected days off will be cleared, and the days off counter will be reset.
    
@@ -72,7 +81,7 @@ This project provides a user-friendly web interface for selecting days off, visu
     
    ![Cleared list of selected days off after clicking Uncheck all days button](assets/cleared-list-of-selected-days-off-after-clicking-uncheck-all-days-button.png)
 
-5. **Export all selected days off to PDF:**
+6. **Export all selected days off to PDF:**
 
    Once you have selected all your desired days off, use the `Export Days Off to PDF` button to generate a PDF file with the selected days.
 
@@ -82,7 +91,7 @@ This project provides a user-friendly web interface for selecting days off, visu
    ![Example export all selected days off to PDF](assets/example-export-days-off-to-pdf.png)
    - [Download example: Export all selected days off to PDF](assets/your_days_off_in_2024-saved_28-06-2024_13_55_33.pdf)
 
-6. **Export all selected days off to iCalendar:**
+7. **Export all selected days off to iCalendar:**
 
    Once you have selected all your desired days off, use the `Export to Your calendar \ Gmail` and `Export to Your calendar \ Outlook` buttons to generate iCalendar files (with your selected days) for Gmail and Outlook calendars.
    
@@ -94,7 +103,7 @@ This project provides a user-friendly web interface for selecting days off, visu
 
    You can import these files into your Google Calendar or Outlook Calendar to add your selected days off to your calendar.
    
-7. **See complete list of church and public holidays for the selected year:**
+8. **See complete list of church and public holidays for the selected year:**
 
    Use the `Show all Church and Public Holidays in this Year` button to see the complete list of church and public holidays for the selected year.
    
@@ -103,7 +112,7 @@ This project provides a user-friendly web interface for selecting days off, visu
    **Example complete list of church and public holidays for the selected year:**
    ![Example complete list of church and public holidays for the selected year](assets/complete-list-of-church-and-public-holidays.png)
 
-8. **Export the complete list of church and public holidays for the selected year to PDF:**
+9. **Export the complete list of church and public holidays for the selected year to PDF:**
 
    Use the `Export to PDF: List of Holidays for this Year` button to generate a PDF file with the complete list of public and church holidays for the selected year.
 
