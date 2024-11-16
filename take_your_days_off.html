@@ -122,10 +122,15 @@
     </style>
 </head>
 <body>
-<div id="container" class="d-flex justify-content-center">
-    <!-- The container div is used to center the body content horizontally using Bootstrap classes.
-    1. The class .d-flex creates a flex container.
-    2. The class .justify-content-center horizontally centers the content within the flex container. -->
+<div id="container" class="container d-flex justify-content-center">
+    <!-- The 'container' class is a Bootstrap utility that sets the width of the page content based on the screen size.
+    It ensures the content has appropriate margins on the left and right, making it visually centered and responsive. -->
+
+    <!-- The 'd-flex' class makes the parent div a flex container, enabling flexbox layout.
+    This allows you to control the alignment and positioning of child elements within the container. -->
+
+    <!-- The 'justify-content-center' class centers the child elements (inside this flex container) horizontally.
+    It applies to the horizontal axis (left to right), ensuring the content is centered within the available space. -->
 
     <div class="row" style="margin-top: 27px;">
         <div class="col-md-6">
