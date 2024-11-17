@@ -29,21 +29,9 @@
     <!-- Moment -->
     <script src="./libs/moment/2.29.1/moment.min.js"></script>
 
-    <!-- Custom CSS -->
-    <style>
-        /* styles for the Back to the calendar button */
-        #button-back-to-the-calendar {
-            margin-top: 24px;
-        }
-
-        /* styles for the Export to PDF button */
-        #button-export-to-pdf {
-            margin-top: 24px;
-        }
-    </style>
 </head>
 <body>
-<div id="container" class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+<div id="container" class="container d-flex justify-content-center align-items-center vh-100">
 
     <!--
     The 'container' class in Bootstrap provides a responsive fixed-width container with automatic margins,
@@ -57,6 +45,10 @@
 
     The 'align-items-center' class vertically centers the content (along the cross axis) within the flex container.
     This keeps the content centered in the vertical direction, even on large or small screens.
+
+    The 'vh-100' class in Bootstrap sets the height of the element to 100% of the viewport height.
+    This ensures that the container always fills the entire height of the visible browser window,
+    providing a vertically centered layout.
     -->
 
     <div class="row">
@@ -72,13 +64,15 @@
                     <!-- Back to the form button -->
                     <a href="form.html" class="btn btn-secondary">Back to the form</a>
                 </div>
-                <div id="button-back-to-the-calendar">
+                <div class="mt-4">
                     <!-- Back to the calendar button -->
                     <button type="button" class="btn btn-info" onclick="goBack()">Back to the calendar</button>
                 </div>
-                <div id="button-export-to-pdf">
+                <div class="mt-4">
                     <!-- Export to PDF button -->
-                    <button type="button" class="btn btn-primary" id="export-to-pdf"><i class="bi bi-file-pdf"></i> Export to PDF: List of Holidays for this Year</button>
+                    <button type="button" class="btn btn-primary" id="export-to-pdf">
+                        <i class="bi bi-file-pdf"></i> Export to PDF: List of Holidays for this Year
+                    </button>
                 </div>
             </div>
         </div>

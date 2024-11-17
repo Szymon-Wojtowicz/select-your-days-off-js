@@ -66,59 +66,44 @@
         }
         /* end of styles for elements of datepicker (days) */
 
+        /* This custom class applies a top margin of 95px specifically to the Legend section, ensuring proper spacing from preceding elements.
+           The !important rule guarantees it takes precedence over conflicting styles. */
+        .mt-custom {
+            margin-top: 95px !important;
+        }
+
         /* styles for elements of Legend: */
         #legend {
             font-family: Arial, Helvetica, sans-serif;
-            font-weight: bold;
             width: 200px;
-            padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 5px;
             background-color: #f8f9fa;
         }
 
         #church-holiday-legend {
             background-color: red;
-            padding: 5px;
-            margin-top: 5px;
         }
 
         #public-holiday-legend {
             background-color: orange;
-            padding: 5px;
-            margin-top: 5px;
         }
 
         #weekend-legend {
             background-color: green;
-            padding: 5px;
-            margin-top: 5px;
         }
 
         #working-day-legend {
             background-color: grey;
-            padding: 5px;
-            margin-top: 5px;
         }
         /* end of styles for elements of Legend */
 
         /* styles for the back button */
         #back-button {
-            margin-top: 350px;
+            margin-top: 22rem;  /* Bootstrap-compatible rem units (22rem ≈ 350px) */
         }
 
         /* disable the Done button in datepicker */
         button.ui-datepicker-close { display: none; }
-
-        /* styles for the content of first column */
-        #content-of-column-1 {
-            margin-left: 20px;  /* adds a left margin of 20 pixels to the content of first column */
-        }
-
-        /* styles for the content of second column */
-        #content-of-column-2 {
-            margin-left: 20px;  /* adds a left margin of 20 pixels to the content of second column */
-        }
     </style>
 </head>
 <body>
@@ -132,9 +117,9 @@
     <!-- The 'justify-content-center' class centers the child elements (inside this flex container) horizontally.
     It applies to the horizontal axis (left to right), ensuring the content is centered within the available space. -->
 
-    <div class="row" style="margin-top: 27px;">
+    <div class="row mt-3">
         <div class="col-md-6">
-            <div id="content-of-column-1">  <!-- This div contains the content of first column -->
+            <div id="content-of-column-1" class="ms-4">  <!-- This div contains the content of first column -->
                 <div>
                     <h1>Calendar <br>of Days Off</h1>
                     <label for="datepicker"><b>Select Your Days Off:</b></label><br>
@@ -156,7 +141,7 @@
         </div>
 
         <div class="col-md-6">
-            <div id="content-of-column-2">  <!-- This div contains the content of second column -->
+            <div id="content-of-column-2" class="ms-4">  <!-- This div contains the content of second column -->
                 <br>
                 <div>
                     <!-- The selected-days unordered list displays the list of days off that have been selected by the user -->
@@ -169,18 +154,21 @@
 
                 <div>
                     <!-- Button to uncheck all selected days -->
-                    <button type="button" id="uncheckAllDaysBtn" class="btn btn-danger" style="margin-bottom: 24px;"><i class="bi bi-journal-minus"></i> Uncheck all days</button>
+                    <button type="button" id="uncheckAllDaysBtn" class="btn btn-danger mb-3">
+                        <i class="bi bi-journal-minus"></i> Uncheck all days
+                    </button>
                 </div>
 
                 <div>
                     <!-- Button to export selected days off to PDF -->
-                    <button type="button" class="btn btn-primary" id="exportPDFBtn"><i class="bi bi-file-pdf"></i> Export Days Off to PDF</button>
+                    <button type="button" class="btn btn-primary mb-3" id="exportPDFBtn">
+                        <i class="bi bi-file-pdf"></i> Export Days Off to PDF
+                    </button>
                     <div id="pdfTable"></div>
                 </div>
-                <br>
 
                 <!-- Dropdown menu to export selected days off to different calendar platforms -->
-                <div class="dropdown">
+                <div class="dropdown mb-3">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-calendar"></i> Export to Your calendar: <span class="caret"></span> <!-- dropdown button -->
                     </button>
@@ -191,11 +179,11 @@
                 </div>
 
                 <!-- Legend section explaining the meaning of different calendar day types -->
-                <div id="legend" style="margin-top: 95px;"> Legend:
-                    <div id="church-holiday-legend">Church holiday</div>
-                    <div id="public-holiday-legend">Public holiday</div>
-                    <div id="weekend-legend">Weekend</div>
-                    <div id="working-day-legend">Working day</div>
+                <div id="legend" class="mt-custom p-3 rounded-3 fw-bold"> Legend:
+                    <div id="church-holiday-legend" class="mt-1 p-2">Church holiday</div>
+                    <div id="public-holiday-legend" class="mt-1 p-2">Public holiday</div>
+                    <div id="weekend-legend" class="mt-1 p-2">Weekend</div>
+                    <div id="working-day-legend" class="mt-1 p-2">Working day</div>
                 </div>
                 <br>
             </div>
