@@ -3,81 +3,64 @@
 <head>
     <meta charset="UTF-8">
 
-    <!-- viewport meta tag -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Calendar of Days Off</title>
 
-    <!-- favicon link -->
     <link rel="icon" href="./image/javascript.ico" type="image/x-icon">
 
-    <!-- jQuery -->
     <script src="./libs/jquery/3.6.4/jquery.min.js"></script>
 
-    <!-- Bootstrap -->
     <link rel="stylesheet" href="./libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
     <script src="./libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 
-    <!-- jQuery UI - Datepicker -->
     <link rel="stylesheet" href="./libs/jqueryui/1.13.2/themes/base/jquery-ui.css">
     <script src="./libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="./libs/bootstrap-icons/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
-    <!-- jsPDF -->
     <script src="./libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-    <!-- jsPDF autotable -->
     <script src="./libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
-    <!-- Moment -->
     <script src="./libs/moment/2.29.1/moment.min.js"></script>
 
-    <!-- iCalendar Library -->
     <script src="./libs/iCalendar/ics.js-master/ics.js"></script>
 
-    <!-- FileSaver -->
     <script src="./libs/FileSaver/2.0.5/FileSaver.min.js"></script>
 
-    <!-- external JS script -->
     <script src="./js/script.js"></script>
 
-    <!-- Custom CSS -->
     <style>
-        /* styles for elements of datepicker (days): */
         .weekend {
-            background-color: green;  /* set the background color of elements with the class .weekend to green */
-            pointer-events: none;  /* set Saturdays and Sundays so they cannot be selected as holidays in the datepicker */
+            background-color: green;
+            pointer-events: none;
         }
 
         .working-day {
-            background-color: grey;  /* set the background color of elements with the class .working-day to grey */
+            background-color: grey;
         }
 
         .public-holiday {
-            background-color: orange;  /* set the background color of elements with the class .public-holiday to orange */
-            pointer-events: all;  /* this line of code enables tooltip */
+            background-color: orange;
+            pointer-events: all;
         }
 
         .church-holiday {
-            background-color: red;  /* set the background color of elements with the class .church-holiday to red */
-            pointer-events: all;  /* this line of code enables tooltip */
+            background-color: red;
+            pointer-events: all;
         }
-        /* end of styles for elements of datepicker (days) */
 
-        /* This custom class applies a top margin of 95px specifically to the Legend section, ensuring proper spacing from preceding elements.
-           The !important rule guarantees it takes precedence over conflicting styles. */
         .mt-custom {
             margin-top: 95px !important;
         }
 
-        /* styles for elements of Legend: */
         #legend {
             font-family: Arial, Helvetica, sans-serif;
             width: 200px;
             border: 1px solid #ccc;
             background-color: #f8f9fa;
+            margin-bottom: 1.5rem;
         }
 
         #church-holiday-legend {
@@ -95,112 +78,128 @@
         #working-day-legend {
             background-color: grey;
         }
-        /* end of styles for elements of Legend */
 
-        /* styles for the back button */
         #back-button {
-            margin-top: 22rem;  /* Bootstrap-compatible rem units (22rem ≈ 350px) */
+            margin-top: 22rem;
         }
 
-        /* disable the Done button in datepicker */
         button.ui-datepicker-close { display: none; }
+
+        .section-spacing {
+            margin-bottom: 1.5rem;
+        }
+
+        .label-spacing {
+            margin-bottom: 0.75rem;
+        }
+
+        .btn-long-text {
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+        .btn-long-text:hover {
+            background-color: #0056b3;
+        }
+
+        .mb-4 {
+            margin-bottom: 1.5rem;
+        }
+
+        .mt-4 {
+            margin-top: 1.5rem;
+        }
+
+        .mt-2 {
+            margin-top: 0.75rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.75rem;
+        }
+
+        .mt-1 {
+            margin-top: 0.25rem;
+        }
+
+        .button-spacing {
+            margin-bottom: 0.75rem;
+        }
+
+        #content-of-column-2 > div:first-child {
+            margin-top: 1.5rem;
+        }
     </style>
 </head>
 <body>
-<div id="container" class="container d-flex justify-content-center">
-    <!-- The 'container' class is a Bootstrap utility that sets the width of the page content based on the screen size.
-    It ensures the content has appropriate margins on the left and right, making it visually centered and responsive. -->
-
-    <!-- The 'd-flex' class makes the parent div a flex container, enabling flexbox layout.
-    This allows you to control the alignment and positioning of child elements within the container. -->
-
-    <!-- The 'justify-content-center' class centers the child elements (inside this flex container) horizontally.
-    It applies to the horizontal axis (left to right), ensuring the content is centered within the available space. -->
-
-    <div class="row mt-3">
-        <div class="col-md-6">
-            <div id="content-of-column-1" class="ms-4">  <!-- This div contains the content of first column -->
-                <div>
-                    <h1>Calendar <br>of Days Off</h1>
-                    <label for="datepicker"><b>Select Your Days Off:</b></label><br>
-                    <!-- The <input> element with type "text" creates the datepicker input field. It allows users to select their desired days off -->
-                    <input type="text" id="datepicker" name="datepicker">
-                </div>
-
-                <!-- The back button redirects to the form page -->
-                <div id="back-button">
-                    <a href="form.html" class="btn btn-secondary">Back to the form</a>
-                </div>
-                <br>
-
-                <!-- Button to show all Church and Public Holidays in the current year -->
-                <div>
-                    <button type="button" class="btn btn-primary" id="showAllHolidaysBtn">Show all Church and Public<br> Holidays in this Year</button>
+    <div id="container" class="container d-flex justify-content-center">
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div id="content-of-column-1" class="ms-4">
+                    <div>
+                        <h1>Calendar <br>of Days Off</h1>
+                        <label for="datepicker"><b>Select Your Days Off:</b></label><br>
+                        <input type="text" id="datepicker" name="datepicker">
+                    </div>
+                    <div id="back-button">
+                        <a href="form.html" class="btn btn-secondary mb-3">Back to the form</a>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary btn-long-text" id="showAllHolidaysBtn">
+                            Show all Church and Public<br>Holidays in this Year</button>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-6">
-            <div id="content-of-column-2" class="ms-4">  <!-- This div contains the content of second column -->
-                <br>
-                <div>
-                    <!-- The selected-days unordered list displays the list of days off that have been selected by the user -->
-                    <b>Selected Days Off:</b>
-                    <ul id="selected-days"></ul>
-
-                    <!-- Displays the number of selected days out of the total available days -->
-                    <p>You have selected <b><span id="counter-value">0</span></b> out of <b>26</b> days.</p>
+            <div class="col-md-6">
+                <div id="content-of-column-2" class="ms-4">
+                    <div>
+                        <b>Selected Days Off:</b>
+                        <ul id="selected-days"></ul>
+                        <p>You have selected <b><span id="counter-value">0</span></b> out of <b>26</b> days.</p>
+                    </div>
+                    <div>
+                        <button type="button" id="uncheckAllDaysBtn" class="btn btn-danger mb-3">
+                            <i class="bi bi-journal-minus"></i> Uncheck all days
+                        </button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary mb-3" id="exportPDFBtn">
+                            <i class="bi bi-file-pdf"></i> Export Days Off to PDF
+                        </button>
+                        <div id="pdfTable"></div>
+                    </div>
+                    <div class="dropdown mb-3">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-calendar"></i> Export to Your calendar: <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" href="#" id="gmail-export">Gmail</a></li>
+                            <li><a class="dropdown-item" href="#" id="outlook-export">Outlook</a></li>
+                        </ul>
+                    </div>
+                    <div id="legend" class="mt-custom p-3 rounded-3 fw-bold"> Legend:
+                        <div id="church-holiday-legend" class="mt-1 p-2">Church holiday</div>
+                        <div id="public-holiday-legend" class="mt-1 p-2">Public holiday</div>
+                        <div id="weekend-legend" class="mt-1 p-2">Weekend</div>
+                        <div id="working-day-legend" class="mt-1 p-2">Working day</div>
+                    </div>
                 </div>
-
-                <div>
-                    <!-- Button to uncheck all selected days -->
-                    <button type="button" id="uncheckAllDaysBtn" class="btn btn-danger mb-3">
-                        <i class="bi bi-journal-minus"></i> Uncheck all days
-                    </button>
-                </div>
-
-                <div>
-                    <!-- Button to export selected days off to PDF -->
-                    <button type="button" class="btn btn-primary mb-3" id="exportPDFBtn">
-                        <i class="bi bi-file-pdf"></i> Export Days Off to PDF
-                    </button>
-                    <div id="pdfTable"></div>
-                </div>
-
-                <!-- Dropdown menu to export selected days off to different calendar platforms -->
-                <div class="dropdown mb-3">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-calendar"></i> Export to Your calendar: <span class="caret"></span> <!-- dropdown button -->
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#" id="gmail-export">Gmail</a></li>
-                        <li><a class="dropdown-item" href="#" id="outlook-export">Outlook</a></li>
-                    </ul>
-                </div>
-
-                <!-- Legend section explaining the meaning of different calendar day types -->
-                <div id="legend" class="mt-custom p-3 rounded-3 fw-bold"> Legend:
-                    <div id="church-holiday-legend" class="mt-1 p-2">Church holiday</div>
-                    <div id="public-holiday-legend" class="mt-1 p-2">Public holiday</div>
-                    <div id="weekend-legend" class="mt-1 p-2">Weekend</div>
-                    <div id="working-day-legend" class="mt-1 p-2">Working day</div>
-                </div>
-                <br>
             </div>
         </div>
     </div>
-</div>
-<script>
-    $(document).ready(function() {  // jQuery document ready function
-        $('[data-toggle="tooltip"]').tooltip();  // enable tooltip (feature for church holidays and public holidays in datepicker)
 
-        // get the year parameter from the URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const year = urlParams.get('year');
+    <script>
+        $(document).ready(function() {  // jQuery document ready function
+            $('[data-toggle="tooltip"]').tooltip();  // enable tooltip (feature for church holidays and public holidays in datepicker)
 
-        // set the year in the page title and heading
-        document.title = "Take Your Days Off in " + year;
-    });
-</script>
+            // get the year parameter from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const year = urlParams.get('year');
+
+            // set the year in the page title and heading
+            document.title = "Take Your Days Off in " + year;
+        });
+    </script>
 </body>
 </html>

@@ -2,36 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">  <!-- viewport meta tag
-     This tag is used to control the viewport behavior of the webpage, specifically setting the width to the device width and initial scale to 1. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Form</title>
-    <link rel="icon" href="./image/javascript.ico" type="image/x-icon">  <!-- favicon link -->
-
-    <!-- link to Bootstrap CSS stylesheet -->
+    <link rel="icon" href="./image/javascript.ico" type="image/x-icon">
     <link rel="stylesheet" href="./libs/bootstrap/4.5.2/css/bootstrap.min.css">
-
     <style>
-        /* custom styles for the container with the form inside */
         #container {
-            /* positioning */
-            position: absolute;  /* position the container absolutely */
-            top: 40%;  /* position the container 40% from the top */
-            left: 50%; /* position the container 50% from the left */
-            transform: translate(-50%, -50%);  /* center the container horizontally and vertically */
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
 <body>
-<div id="container">  <!-- container div element -->
-    <h2>Enter the Year:</h2>
-    <form action="take_your_days_off.html?year=" method="get">  <!-- form element for entering the year -->
-        <div class="form-group">  <!-- form group container -->
-            <!-- input field for the year -->
-            <input type="number" min="1900" max="2099" class="form-control" id="year" name="year" placeholder="Year" required>
-        </div>
-        <!-- submit button -->
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+    <div id="container">
+        <h2>Enter the Year:</h2>
+        <form action="take_your_days_off.html?year=" method="get">
+            <div class="form-group">
+                <input type="number" min="1900" max="2099" class="form-control" id="year" name="year" placeholder="Year" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </body>
 </html>
