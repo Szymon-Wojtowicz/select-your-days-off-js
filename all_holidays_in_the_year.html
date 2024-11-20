@@ -225,11 +225,11 @@
 
         // Function to navigate back to the previous page (take_your_days_off.html)
         function goBack() {
-            // Retrieve the query string from the current URL
-            const yearParam = window.location.search;
+            // Retrieve the query string from the current URL (e.g., "?year=2024")
+            const queryString = window.location.search;
 
             // Construct the new URL by appending the query string to "take_your_days_off.html"
-            const newURL = "take_your_days_off.html" + yearParam;
+            const newURL = "take_your_days_off.html" + queryString;
 
             // Navigate to the new URL
             window.location.href = newURL;
