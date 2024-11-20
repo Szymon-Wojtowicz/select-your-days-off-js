@@ -158,23 +158,25 @@ $(document).ready(function() {  // jQuery document ready function
     });
 
     // Function to calculate Easter date for the given year
+    // Based on the Meeus/Jones/Butcher algorithm, as described on Wikipedia:
+    // https://pl.wikipedia.org/wiki/Wielkanoc#Wyznaczanie_daty_Wielkanocy_w_danym_roku
     function getEaster(year) {
-        const a = year % 19;
-        const b = Math.floor(year / 100);
-        const c = year % 100;
-        const d = Math.floor(b / 4);
-        const e = b % 4;
-        const f = Math.floor((b + 8) / 25);
-        const g = Math.floor((b - f + 1) / 3);
-        const h = (19 * a + b - d - g + 15) % 30;
-        const i = Math.floor(c / 4);
-        const k = c % 4;
-        const l = (32 + 2 * e + 2 * i - h - k) % 7;
-        const m = Math.floor((a + 11 * h + 22 * l) / 451);
-        const n = Math.floor((h + l - 7 * m + 114) / 31);
-        const p = (h + l - 7 * m + 114) % 31;
+        const a = year % 19;  // a: The year's position in the 19-year Metonic cycle (used to approximate the lunar cycle)
+        const b = Math.floor(year / 100);  // b: The century the year belongs to (e.g., for 2024, b = 20)
+        const c = year % 100;  // c: The year within the century (e.g., for 2024, c = 24)
+        const d = Math.floor(b / 4);  // d: The number of leap years in the century
+        const e = b % 4;  // e: The remainder when dividing the century number by 4 (indicating the position in the leap-year cycle)
+        const f = Math.floor((b + 8) / 25);  // f: The number of centuries where adjustments to the lunar calendar were skipped (related to the Gregorian reform)
+        const g = Math.floor((b - f + 1) / 3);  // g: Another Gregorian correction factor, accounting for the extra leap day suppression
+        const h = (19 * a + b - d - g + 15) % 30;  // h: Determines the "epact," the age of the moon on January 1st of the given year
+        const i = Math.floor(c / 4);  // i: The number of leap years within the current century
+        const k = c % 4;  // k: The position of the year within the 4-year leap-year cycle
+        const l = (32 + 2 * e + 2 * i - h - k) % 7;  // l: Determines the day of the week for the Paschal full moon
+        const m = Math.floor((a + 11 * h + 22 * l) / 451);  // m: A correction factor for the Gregorian calendar adjustment
+        const n = Math.floor((h + l - 7 * m + 114) / 31);  // n: The month of Easter (3 for March, 4 for April)
+        const p = (h + l - 7 * m + 114) % 31;  // p: The day of Easter within the month
 
-        // Return a new Date object representing the Easter date for the given year
+        // Return a new Date object representing the Easter date for the given year (n - 1 because months are zero-based)
         return new Date(year, n - 1, p + 1);
     }
 
