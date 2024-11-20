@@ -128,7 +128,7 @@ $(document).ready(function() {  // jQuery document ready function
     });
 
     // Function to clear the datepicker and remove all selected days (days off) from the list
-    function uncheckAllDays() {
+    function resetAllDays() {
         selectedDates = [];  // Clear the array of selected dates
         $("#datepicker td.selected").removeClass("selected");  // Remove the selected class from all datepicker table cells
         $("#selected-days").empty();  // Empty the selected days list
@@ -136,9 +136,9 @@ $(document).ready(function() {  // jQuery document ready function
         checkSelectedDays();  // Trigger a check on the selected days
     }
 
-    // Code to call the uncheckAllDays() function when the Uncheck all days button is clicked
-    $("#uncheckAllDaysBtn").click(function() {
-        uncheckAllDays();  // Call the uncheckAllDays function to clear and reset the selected days (days off)
+    // Code to call the resetAllDays() function when the Uncheck all days button is clicked
+    $("#resetAllDaysBtn").click(function() {
+        resetAllDays();  // Call the resetAllDays function to clear and reset the selected days (days off)
     });
 
     // Function to check if days were selected and enable/disable buttons accordingly
