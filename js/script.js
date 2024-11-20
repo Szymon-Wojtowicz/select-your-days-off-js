@@ -41,7 +41,7 @@ $(document).ready(function() {  // jQuery document ready function
             }
         });
 
-        // Jeśli dzień nie jest świętem, sprawdzamy, czy to weekend czy dzień roboczy
+        // If the day is not a holiday, check if it's a weekend or a working day
         if (!cssClass) {
             cssClass = (day === 0 || day === 6) ? "weekend" : "working-day";
         }
@@ -71,7 +71,7 @@ $(document).ready(function() {  // jQuery document ready function
 
     // Initialize the datepicker widget for the element with the ID datepicker.
     // This code configures the datepicker with various options and settings to enable date selection and define its behavior.
-    $("#datepicker").datepicker({
+    $('#datepicker').datepicker({
         defaultDate: new Date(parseInt(year), 0),  // Set the default date to the first month of the year
         changeMonth: false,  // Disable the ability to change the month
         changeYear: false,  // Disable the ability to change the year
@@ -130,30 +130,32 @@ $(document).ready(function() {  // jQuery document ready function
     // Function to clear the datepicker and remove all selected days (days off) from the list
     function resetAllDays() {
         selectedDates = [];  // Clear the array of selected dates
-        $("#datepicker td.selected").removeClass("selected");  // Remove the selected class from all datepicker table cells
-        $("#selected-days").empty();  // Empty the selected days list
-        $("#counter-value").text("0");  // Reset the counter value to 0
+        $('#datepicker td.selected').removeClass("selected");  // Remove the selected class from all datepicker table cells
+        $('#selected-days').empty();  // Empty the selected days list
+        $('#counter-value').text("0");  // Reset the counter value to 0
         checkSelectedDays();  // Trigger a check on the selected days
     }
 
     // Code to call the resetAllDays() function when the Uncheck all days button is clicked
-    $("#resetAllDaysBtn").click(function() {
+    $('#reset-all-days-btn').click(function() {
         resetAllDays();  // Call the resetAllDays function to clear and reset the selected days (days off)
     });
 
     // Function to check if days were selected and enable/disable buttons accordingly
     function checkSelectedDays() {
         if (selectedDates.length === 0) {  // Check if there are no selected dates
-            $('#exportPDFBtn').attr('disabled', 'disabled');  // Disable the export PDF button
-            $('#dropdownMenuButton').attr('disabled', 'disabled');  // Disable the dropdown menu button
+            $('#reset-all-days-btn').attr('disabled', 'disabled');  // Disable the uncheck all days button
+            $('#export-pdf-btn').attr('disabled', 'disabled');  // Disable the export PDF button
+            $('#dropdown-menu-button').attr('disabled', 'disabled');  // Disable the dropdown menu button
         } else {
-            $('#exportPDFBtn').removeAttr('disabled');  // Enable the export PDF button
-            $('#dropdownMenuButton').removeAttr('disabled');  // Enable the dropdown menu button
+            $('#reset-all-days-btn').removeAttr('disabled');  // Enable the uncheck all days button
+            $('#export-pdf-btn').removeAttr('disabled');  // Enable the export PDF button
+            $('#dropdown-menu-button').removeAttr('disabled');  // Enable the dropdown menu button
         }
     }
 
     // Event handler for showing all holidays (public and church holidays) in the selected year
-    $("#showAllHolidaysBtn").click(function() {
+    $('#show-all-holidays-btn').click(function() {
         window.location.href = "all_holidays_in_the_year.html?year=" + year;
     });
 
@@ -213,7 +215,7 @@ $(document).ready(function() {  // jQuery document ready function
     ];
 
     // Export selected days (days off) to a PDF file
-    $('#exportPDFBtn').click(function() {
+    $('#export-pdf-btn').click(function() {
         // Assign the jsPDF library to the global window object
         window.jsPDF = window.jspdf.jsPDF;
 
@@ -346,12 +348,12 @@ $(document).ready(function() {  // jQuery document ready function
     }
 
     // Export selected days (days off) to Gmail (Google Calendar), in the iCalendar format
-    $("#gmail-export").click(function() {
+    $('#gmail-export').click(function() {
         exportToICalendar('gmail');
     });
 
     // Export selected days (days off) to Outlook (Outlook Calendar), in the iCalendar format
-    $("#outlook-export").click(function() {
+    $('#outlook-export').click(function() {
         exportToICalendar('outlook');
     });
 
