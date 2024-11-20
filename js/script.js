@@ -19,32 +19,32 @@ $(document).ready(function() {  // jQuery document ready function
         let cssClass = "";  // Initialize an empty string variable to store the CSS class
         let tooltip = "";  // Initialize an empty string variable to store the tooltip text
 
-        // Check if it's a weekend or a working day
-        if (day === 0 || day === 6) {
-            cssClass = "weekend";
-        } else {
-            cssClass = "working-day";
-        }
+        // Mapping holiday types to CSS classes and tooltips
+        const holidayMapping = {
+            'Public holiday': { cssClass: 'public-holiday', tooltip: 'Public Holiday' },
+            'Church holiday': { cssClass: 'church-holiday', tooltip: 'Church Holiday' }
+        };
 
-        // Iterate over the holidays array
+        // Iterate over the holidays array and check if it's a holiday first
         holidays.forEach(function (holiday) {
             // Check if the current holiday matches the provided date
             if (holiday.date.getFullYear() === date.getFullYear()
                 && holiday.date.getMonth() === date.getMonth()
                 && holiday.date.getDate() === date.getDate()) {
 
-                // Set CSS class and tooltip based on holiday type
-                if (holiday.type === 'Public holiday') {
-                    cssClass = "public-holiday";
-                    tooltip = holiday.name + " (" + holiday.type + ")";
+                // Check if the holiday type exists in the mapping
+                if (holidayMapping[holiday.type]) {
+                    const { cssClass: holidayCssClass, tooltip: holidayTooltip } = holidayMapping[holiday.type];
+                    cssClass = holidayCssClass;
+                    tooltip = holiday.name + " (" + holidayTooltip + ")";
                 }
-                if (holiday.type === 'Church holiday') {
-                    cssClass = "church-holiday";
-                    tooltip = holiday.name + " (" + holiday.type + ")";
-                }
-
             }
         });
+
+        // Jeśli dzień nie jest świętem, sprawdzamy, czy to weekend czy dzień roboczy
+        if (!cssClass) {
+            cssClass = (day === 0 || day === 6) ? "weekend" : "working-day";
+        }
 
         // Disable days if the maximum number of selectable days has been reached
         if (selectedDates.length >= maxSelectableDays) {
