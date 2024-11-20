@@ -141,9 +141,7 @@
             const li = document.createElement('li');
             const date = new Date(holiday.date).toDateString();
             li.textContent = `${holiday.name + " - " + holiday.type} (${date})`;
-
-            if (holiday.type === 'Church holiday') li.style.color = 'red';  // set the font color to red if the list item is of type: Church holiday
-            if (holiday.type === 'Public holiday') li.style.color = 'orange';  // set the font color to orange if the list item is of type: Public holiday
+            li.style.color = holiday.type === 'Church holiday' ? 'red' : 'orange';  // set the text color based on the holiday type: red for Church holidays, orange for Public holidays
             holidaysList.appendChild(li);
         });
 
@@ -188,8 +186,7 @@
                 const {date, name, type} = holiday;
 
                 // Set the text color to red if the holiday is of type Church holiday, or orange if it is of type Public holiday
-                if (holiday.type === 'Church holiday') doc.setTextColor(255,0,0);
-                if (holiday.type === 'Public holiday') doc.setTextColor('orange');
+                doc.setTextColor(holiday.type === 'Church holiday' ? 255 : 255, holiday.type === 'Church holiday' ? 0 : 165, holiday.type === 'Church holiday' ? 0 : 0);
 
                 // Add the holiday information to the PDF document
                 doc.text(`${index+1}.) ${name} - ${type} (${date.toDateString()})`, 20, startY);
