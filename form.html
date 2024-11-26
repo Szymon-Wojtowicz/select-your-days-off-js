@@ -13,17 +13,80 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+        .invalid-feedback {
+            color: red;
+        }
     </style>
 </head>
 <body>
-    <div id="container">
-        <h2>Enter the Year:</h2>
-        <form action="take_your_days_off.html?year=" method="get">
-            <div class="form-group">
-                <input type="number" min="1900" max="2099" class="form-control" id="year" name="year" placeholder="Year" required>
+<div id="container">
+    <h2>Enter the Year:</h2>
+    <form id="yearForm" action="take_your_days_off.html" method="get" novalidate>
+        <div class="form-group">
+            <input type="number" class="form-control" id="year" name="year" placeholder="Year" required>
+            <div class="invalid-feedback">
+                <!-- Error messages will appear here -->
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const yearInput = document.getElementById('year');
+        const yearForm = document.getElementById('yearForm');
+        const feedbackElement = yearInput.nextElementSibling;
+
+        // Set dynamic range of years
+        const currentYear = new Date().getFullYear();
+        const minYear = currentYear - 5;
+        const maxYear = currentYear + 5;
+
+        yearInput.setAttribute('min', minYear);
+        yearInput.setAttribute('max', maxYear);
+
+        // Validation function
+        const validateYear = () => {
+            yearInput.setCustomValidity(''); // Reset custom error message
+            feedbackElement.textContent = ''; // Reset error text
+
+            const value = yearInput.value.trim();
+
+            // Check if the field is empty
+            if (yearInput.validity.valueMissing) {
+                yearInput.setCustomValidity("Please fill out this field.");
+                feedbackElement.textContent = "Please fill out this field.";
+            }
+            // Check if the value is an integer
+            else if (isNaN(value) || value.includes('.') || !/^\d+$/.test(value)) {
+                yearInput.setCustomValidity("The year must be a valid number.");
+                feedbackElement.textContent = "The year must be a valid number.";
+            }
+            // Check the range
+            else if (yearInput.validity.rangeUnderflow) {
+                yearInput.setCustomValidity(`The year must be at least ${minYear}.`);
+                feedbackElement.textContent = `The year must be at least ${minYear}.`;
+            } else if (yearInput.validity.rangeOverflow) {
+                yearInput.setCustomValidity(`The year must be no more than ${maxYear}.`);
+                feedbackElement.textContent = `The year must be no more than ${maxYear}.`;
+            }
+        };
+
+        // Check during input
+        yearInput.addEventListener('input', validateYear);
+
+        // Check before form submission
+        yearForm.addEventListener('submit', function (event) {
+            validateYear();
+            if (!yearForm.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            yearForm.classList.add('was-validated');
+        });
+    });
+</script>
+<script src="./libs/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
