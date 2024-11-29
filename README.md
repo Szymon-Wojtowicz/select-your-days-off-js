@@ -16,6 +16,7 @@ This project provides a user-friendly web interface for selecting days off, visu
 
 ## Features
 
+- Added dynamic validation for the initial form where user enters the year. The form ensures the entered year is a valid integer within a dynamically set range (current year ± 5). Real-time error messages guide user to correct their input before submission.
 - Date picker for selecting days off.
 - The user can only choose days off except for church and public holidays in Poland.
 - When the user hovers mouse over a day in the calendar that is a church or national holiday, it will be displayed in the tooltip the information about the name of the holiday and its type.
@@ -42,7 +43,7 @@ This project provides a user-friendly web interface for selecting days off, visu
 
 1. **Open the app and enter a year into the form:**
 
-   Open `form.html` in your web browser. Enter a year between 1900 and 2099 into the form.
+   Open `form.html` in your web browser. Enter a year within the range of the current year ± 5 into the form. The range is dynamically adjusted based on the current year.
    
    ![Enter a year into the form](assets/form.png)
    
