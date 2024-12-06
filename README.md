@@ -23,6 +23,7 @@ This project provides a user-friendly web interface for selecting days off, visu
 - Export selected days to a PDF file.
 - Export selected days in iCalendar format for Gmail and Outlook calendars.
 - Holiday display functionality.
+- If the user attempts to select a day that is marked as a public or church holiday in the calendar, an alert will appear with the message: "You cannot select this date because it is a holiday."
 - Responsive and user-friendly design (using Twitter Bootstrap).
    
 ## Installation
