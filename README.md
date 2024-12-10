@@ -16,15 +16,14 @@ This project provides a user-friendly web interface for selecting days off, visu
 
 ## Features
 
-- Added dynamic validation for the initial form where user enters the year. The form ensures the entered year is a valid integer within a dynamically set range (current year ± 5). Real-time error messages guide user to correct their input before submission.
-- Date picker for selecting days off.
-- The user can only choose days off except for church and public holidays in Poland.
-- When the user hovers mouse over a day in the calendar that is a church or national holiday, it will be displayed in the tooltip the information about the name of the holiday and its type.
-- Export selected days to a PDF file.
-- Export selected days in iCalendar format for Gmail and Outlook calendars.
-- Holiday display functionality.
-- If the user attempts to select a day that is marked as a public or church holiday in the calendar, an alert will appear with the message: "You cannot select this date because it is a holiday."
-- Responsive and user-friendly design (using Twitter Bootstrap).
+- **Dynamic form validation:** Ensures the entered year is a valid integer within a dynamically set range (current year ± 5). Real-time error messages guide the user to correct the input before submission.
+- **Interactive date picker:** The user can select days off with a clear and responsive date picker.
+- **Highlighting holidays:** Public holidays are highlighted in orange frames, church holidays in red frames, weekends in green, and working days in grey within the date picker calendar.
+- **Holiday protection:** Days that are church or public holidays in Poland cannot be selected as days off. An alert notifies the user if an attempt is made to select such dates.
+- **Tooltip with holiday details:** When hovering over a holiday, the tooltip dynamically displays its name and type (e.g., Church or Public holiday).
+- **Export selected days to multiple formats:** Selected days can be exported to a PDF file or an iCalendar (.ics) file for Gmail and Outlook calendars.
+- **Export of all holidays:** A complete list of church and public holidays for the selected year can be exported to a PDF file.
+- **Responsive design:** Built with Twitter Bootstrap for a modern, mobile-friendly experience.
    
 ## Installation
 
