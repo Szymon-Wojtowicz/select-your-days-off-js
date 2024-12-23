@@ -135,6 +135,4 @@ The project uses the following libraries and frameworks:
 - [iCalendar](https://github.com/nwcell/ics.js/)
 - [FileSaver](https://cdnjs.com/libraries/FileSaver.js)
 
-The `holidays` array in `app.js` dynamically reflects the holidays (and their respective dates) based on the selected year.
-
-<!-- The `holidays` array in `script.js` is updated with the corresponding holidays (their days) for the selected year. -->
+The `holidays` array in `app.js` dynamically generates and stores holiday dates for the year selected by the user, utilizing functions implemented in `calendar.js`.
