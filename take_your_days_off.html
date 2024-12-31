@@ -5,9 +5,11 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Calendar of Days Off</title>
+    <title>Take Your Days Off</title>
 
     <link rel="icon" href="./image/javascript.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="./css/take_days_off.css">
 
     <script src="./libs/jquery/3.6.4/jquery.min.js"></script>
 
@@ -19,119 +21,19 @@
 
     <link rel="stylesheet" href="./libs/bootstrap-icons/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
+    <script src="./libs/moment/2.29.1/moment.min.js" defer></script>
+
     <script src="./libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <script src="./libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
-    <script src="./libs/moment/2.29.1/moment.min.js"></script>
+    <script src="./libs/iCalendar/ics.js-master/ics.js" defer></script>
 
-    <script src="./libs/iCalendar/ics.js-master/ics.js"></script>
+    <script src="./libs/FileSaver/2.0.5/FileSaver.min.js" defer></script>
 
-    <script src="./libs/FileSaver/2.0.5/FileSaver.min.js"></script>
-
-    <script src="./js/script.js"></script>
-
-    <style>
-        .weekend {
-            background-color: green;
-            pointer-events: none;
-        }
-
-        .working-day {
-            background-color: grey;
-        }
-
-        .public-holiday {
-            background-color: orange;
-            pointer-events: all;
-        }
-
-        .church-holiday {
-            background-color: red;
-            pointer-events: all;
-        }
-
-        .mt-custom {
-            margin-top: 95px !important;
-        }
-
-        #legend {
-            font-family: Arial, Helvetica, sans-serif;
-            width: 200px;
-            border: 1px solid #ccc;
-            background-color: #f8f9fa;
-            margin-bottom: 1.5rem;
-        }
-
-        #church-holiday-legend {
-            background-color: red;
-        }
-
-        #public-holiday-legend {
-            background-color: orange;
-        }
-
-        #weekend-legend {
-            background-color: green;
-        }
-
-        #working-day-legend {
-            background-color: grey;
-        }
-
-        #back-button {
-            margin-top: 22rem;
-        }
-
-        button.ui-datepicker-close { display: none; }
-
-        .section-spacing {
-            margin-bottom: 1.5rem;
-        }
-
-        .label-spacing {
-            margin-bottom: 0.75rem;
-        }
-
-        .btn-long-text {
-            white-space: normal;
-            word-wrap: break-word;
-        }
-
-        .btn-long-text:hover {
-            background-color: #0056b3;
-        }
-
-        .mb-4 {
-            margin-bottom: 1.5rem;
-        }
-
-        .mt-4 {
-            margin-top: 1.5rem;
-        }
-
-        .mt-2 {
-            margin-top: 0.75rem;
-        }
-
-        .mb-2 {
-            margin-bottom: 0.75rem;
-        }
-
-        .mt-1 {
-            margin-top: 0.25rem;
-        }
-
-        .button-spacing {
-            margin-bottom: 0.75rem;
-        }
-
-        #content-of-column-2 > div:first-child {
-            margin-top: 1.5rem;
-        }
-    </style>
+    <script type="module" src="./js/app.js"></script>
 </head>
-<body>
+<body id="take-your-days-off">
     <div id="container" class="container d-flex justify-content-center">
         <div class="row mt-3">
             <div class="col-md-6">
@@ -142,11 +44,11 @@
                         <input type="text" id="datepicker" name="datepicker">
                     </div>
                     <div id="back-button">
-                        <a href="form.html" class="btn btn-secondary mb-3">Back to the form</a>
+                        <a href="form.html" class="btn btn-secondary mb-3">Back to the Form</a>
                     </div>
                     <div>
                         <button type="button" class="btn btn-primary btn-long-text" id="show-all-holidays-btn">
-                            Show all Church and Public<br>Holidays in this Year</button>
+                            Show All Church and Public<br>Holidays in This Year</button>
                     </div>
                 </div>
             </div>
@@ -159,47 +61,34 @@
                     </div>
                     <div>
                         <button type="button" class="btn btn-danger mb-3" id='reset-all-days-btn'>
-                            <i class="bi bi-journal-minus"></i> Uncheck all days
+                            <i class="bi bi-journal-minus"></i> Uncheck All Days
                         </button>
                     </div>
                     <div>
-                        <button type="button" class="btn btn-primary mb-3" id="export-pdf-btn">
+                        <button type="button" class="btn btn-primary mb-3" id="export-days-off-pdf">
                             <i class="bi bi-file-pdf"></i> Export Days Off to PDF
                         </button>
                         <div id="pdfTable"></div>
                     </div>
                     <div class="dropdown mb-3">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdown-menu-button"
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="export-icalendar"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-calendar"></i> Export to Your calendar: <span class="caret"></span>
+                            <i class="bi bi-calendar"></i> Export to Your Calendar <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdown-menu-button">
-                            <li><a class="dropdown-item" href="#" id="gmail-export">Gmail</a></li>
-                            <li><a class="dropdown-item" href="#" id="outlook-export">Outlook</a></li>
+                            <li><button class="dropdown-item" type="button" id="gmail-export">Gmail</button></li>
+                            <li><button class="dropdown-item" type="button" id="outlook-export">Outlook</button></li>
                         </ul>
                     </div>
                     <div id="legend" class="mt-custom p-3 rounded-3 fw-bold"> Legend:
-                        <div id="church-holiday-legend" class="mt-1 p-2">Church holiday</div>
-                        <div id="public-holiday-legend" class="mt-1 p-2">Public holiday</div>
+                        <div id="church-holiday-legend" class="mt-1 p-2">Church Holiday</div>
+                        <div id="public-holiday-legend" class="mt-1 p-2">Public Holiday</div>
                         <div id="weekend-legend" class="mt-1 p-2">Weekend</div>
-                        <div id="working-day-legend" class="mt-1 p-2">Working day</div>
+                        <div id="working-day-legend" class="mt-1 p-2">Working Day</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function() {  // jQuery document ready function
-            $('[data-toggle="tooltip"]').tooltip();  // enable tooltip (feature for church holidays and public holidays in datepicker)
-
-            // get the year parameter from the URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const year = urlParams.get('year');
-
-            // set the year in the page title and heading
-            document.title = "Take Your Days Off in " + year;
-        });
-    </script>
 </body>
 </html>

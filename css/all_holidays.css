@@ -1,0 +1,43 @@
+#container {
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+#holidays {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.holiday-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.holiday-item.header {
+    font-weight: bold;
+    background-color: #f2f2f2;
+}
+
+.holiday-item span {
+    flex: 1;
+    text-align: left;
+    padding: 0 10px;
+}
+
+.public-holiday {
+    background-color: rgba(255, 165, 0, 0.6);
+}
+
+.church-holiday {
+    background-color: rgba(255, 0, 0, 0.6);
+}
+
+.holiday-name,
+.holiday-type,
+.holiday-date {
+    font-weight: bold;
+}

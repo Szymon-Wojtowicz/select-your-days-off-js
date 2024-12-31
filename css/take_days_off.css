@@ -1,0 +1,97 @@
+.weekend {
+    background-color: green;
+    pointer-events: none;
+}
+
+.working-day {
+    background-color: grey;
+}
+
+.public-holiday {
+    background-color: orange;
+    pointer-events: all;
+}
+
+.church-holiday {
+    background-color: red;
+    pointer-events: all;
+}
+
+.mt-custom {
+    margin-top: 95px !important;
+}
+
+#legend {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 200px;
+    border: 1px solid #ccc;
+    background-color: #f8f9fa;
+    margin-bottom: 1.5rem;
+}
+
+#church-holiday-legend {
+    background-color: red;
+}
+
+#public-holiday-legend {
+    background-color: orange;
+}
+
+#weekend-legend {
+    background-color: green;
+}
+
+#working-day-legend {
+    background-color: grey;
+}
+
+#back-button {
+    margin-top: 22rem;
+}
+
+button.ui-datepicker-close { display: none; }
+
+.section-spacing {
+    margin-bottom: 1.5rem;
+}
+
+.label-spacing {
+    margin-bottom: 0.75rem;
+}
+
+.btn-long-text {
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.btn-long-text:hover {
+    background-color: #0056b3;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+.mt-2 {
+    margin-top: 0.75rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.75rem;
+}
+
+.mt-1 {
+    margin-top: 0.25rem;
+}
+
+.button-spacing {
+    margin-bottom: 0.75rem;
+}
+
+#content-of-column-2 > div:first-child {
+    margin-top: 1.5rem;
+}
