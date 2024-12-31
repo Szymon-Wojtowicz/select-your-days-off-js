@@ -90,7 +90,7 @@ This project provides a user-friendly web interface for selecting days off, visu
 
    **Example PDF:**
    ![Example export all selected days off to PDF](assets/example-export-days-off-to-pdf.png)
-   - [Download example: Export all selected days off to PDF](assets/your_days_off_in_2024-saved_28-06-2024_13_55_33.pdf)
+   - [Download example: Export all selected days off to PDF](assets/your_days_off_in_2024-saved_22-12-2024_20_48_23.pdf)
 
 7. **Export all selected days off to iCalendar:**
 
@@ -100,7 +100,7 @@ This project provides a user-friendly web interface for selecting days off, visu
 
    **Example iCalendar File:**
    ![Example iCalendar file](assets/example-icalendar.png)
-   - [Download example: Export all selected days off to iCalendar (.ics)](assets/gmail-your_days_off_in_2024-saved_28-06-2024_16_07_55.ics)
+   - [Download example: Export all selected days off to iCalendar (.ics)](assets/gmail-your_days_off_in_2024-saved_22-12-2024_20_51_12.ics)
 
    You can import these files into your Google Calendar or Outlook Calendar to add your selected days off to your calendar.
    
@@ -121,7 +121,7 @@ This project provides a user-friendly web interface for selecting days off, visu
 
    **Example PDF:**
    ![Example export the complete list of church and public holidays to PDF](assets/example-export-complete-list-of-holidays-to-pdf.png)
-   - [Download example: Export the complete list of church and public holidays for the selected year to PDF](assets/all_holidays_in_2024-saved_28-06-2024_16_47_57.pdf)
+   - [Download example: Export the complete list of church and public holidays for the selected year to PDF](assets/all_holidays_in_2024-saved_22-12-2024_20_57_27.pdf)
       
 ## Dependencies and Data
 
