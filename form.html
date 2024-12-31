@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Form</title>
+    <title>Enter the Year to Plan Your Days Off</title>
     <link rel="icon" href="./image/javascript.ico" type="image/x-icon">
     <link rel="stylesheet" href="./libs/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/form.css">
     <script src="./libs/jquery/3.6.4/jquery.min.js"></script>
     <script type="module">
-        import { attachYearValidation } from './js/utils/formValidation.js';
+        import { attachYearValidation } from './js/modules/formValidation.js';
         attachYearValidation();
     </script>
 </head>
@@ -20,10 +20,9 @@
             <div class="form-group">
                 <input type="number" class="form-control" id="year" name="year" placeholder="Year" required>
                 <div class="invalid-feedback">
-                    <!-- Error messages will appear here -->
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Confirm</button>
         </form>
     </div>
     <script src="./libs/bootstrap/4.5.2/js/bootstrap.min.js"></script>
