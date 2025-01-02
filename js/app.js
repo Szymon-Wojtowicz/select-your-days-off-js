@@ -103,6 +103,7 @@ function handleTakeYourDaysOffPage() {
     setupNavigation(year); // Set up navigation buttons and export options for the selected year
 }
 
+// Configure the "All Holidays" page functionality
 function handleAllHolidaysPage() {
     const year = getYearFromURL(); // Extract the 'year' parameter from the URL query string
     if (!year) {
