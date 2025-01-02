@@ -33,10 +33,16 @@ function handleTakeYourDaysOffPage() {
 
     const selectedDates = []; // Array to store selected days off
     const maxSelectableDays = 26; // Maximum days the user can select
+
+    // Set the maximum number of days off dynamically in the HTML
+    const maxDaysElement = document.getElementById('max-days');
+    if (maxDaysElement) {
+        maxDaysElement.textContent = String(maxSelectableDays);
+    }
+
     const holidays = getHolidays(year); // Fetch the list of holidays for the specified year
 
     if (!isNaN(year)) {
-
         document.title = `Take Your Days Off in ${year}`; // Update the page title dynamically based on the selected year
     }
 
